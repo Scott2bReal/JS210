@@ -35,7 +35,12 @@ algorithm (indexOf):
   4. if at any point characters dont match, reset secondString index and continue where left off in firstString
 
 algorithm (lastIndexOf):
-  1. same as indexOf but go through both strings backwards?
+  2. find indexOf substring
+  3. if the rest of firstString is long enough, look for indexOf again from that chunk
+  4. if indexOf isn't -1, set start to that new call.
+  5. repeat until firstString is too short to contain secondString
+  6. return -1 if all else fails
+
 */
 
 const indexOf = (firstString, secondString) => {
@@ -60,31 +65,21 @@ const indexOf = (firstString, secondString) => {
 
 const lastIndexOf = (firstString, secondString) => {
   let start;
+  let limit = firstString.length - secondString.length;
 
-  for (let index = firstString.length - 1; index >= 0; index--) {
-    if (firstString[index] === secondString[-1]) {
-
-      for (let subIndex = secondString.length - 1; subIndex <= 0; subIndex--) {
-        if (firstString[index - subIndex] !== secondString[subIndex]) {
-          break;
-        } else if (subIndex == 0) {
-          start = index;
-          console.log(start);
-          return start;
-        }
-
-      }
-    }
+  for (let index = limit; index >= 0; index--) {
+    if (firstString[index] === secondString[limit - index]) {
   }
+
   console.log('-1');
   return -1;
 }
 
-indexOf('Some strings', 's');                      // 5
-indexOf('Blue Whale', 'Whale');                    // 5
-indexOf('Blue Whale', 'Blute');                    // -1
-indexOf('Blue Whale', 'leB');                      // -1
-indexOf('This contains This', 'This');             // 0
+// indexOf('Some strings', 's');                      // 5
+// indexOf('Blue Whale', 'Whale');                    // 5
+// indexOf('Blue Whale', 'Blute');                    // -1
+// indexOf('Blue Whale', 'leB');                      // -1
+// indexOf('This contains This', 'This');             // 0
 
 lastIndexOf('Some strings', 's');                  // 11
 lastIndexOf('Blue Whale, Killer Whale', 'Whale');  // 19
