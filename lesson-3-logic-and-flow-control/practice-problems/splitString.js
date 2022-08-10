@@ -11,26 +11,34 @@ output: each string, without delimiter
 
 algorithm:
   1. init empty string
-  2. for each char in input, add that char to empty if not delim
-  3. if char is delim, log the growing string, reset it, and continue
+  2. Guard clause for missing delimiter
+  3. Guard clause for empty string delim
+  4. for each char in input, add that char to empty if not delim
+  5. if char is delim, log the growing string, reset it, and continue
 */
 
 const splitString = (string, delimiter) => {
-  let subString = '';
-
   if (delimiter === undefined) {
-    console.log("ERROR: No delimiter");
+    console.log("ERROR: Noe delimiter")
     return;
-  }
-
-  for (let index = 0; index < string.length; index++) {
-    if (string[index] !== delimiter) {
-      subString += string[index]
-    } else if (string[index] === delimiter) {
-      console.log(subString);
-      subString = '';
-    } else if (delimiter === '') {
+  } else if (delimiter === '') {
+    for (let index = 0; index < string.length; index++) {
       console.log(string[index]);
+    }
+  } else {
+    let subString = '';
+
+    for (let index = 0; index < string.length; index++) {
+      if (string[index] === delimiter) {
+        console.log(subString);
+        subString = '';
+      } else {
+        subString += string[index];
+      }
+    }
+
+    if (subString.length > 0) {
+      console.log(subString);
     }
   }
 }
