@@ -15,3 +15,18 @@ Enter the width of the room in meters:
 7
 The area of the room is 70.00 square meters (753.47 square feet).
 */
+
+const howBig = () => {
+  let readlineSync = require('readline-sync');
+  console.log("Enter the length of the room in meters:")
+  const height = readlineSync.prompt();
+  console.log("Enter the width of the room in meters:")
+  const width = readlineSync.prompt();
+
+  const squareMeters = height * width;
+  const squareFeet = squareMeters * 10.7639;
+
+  console.log(`The area of the room is ${squareMeters} square meters (${squareFeet})`);
+}
+
+howBig();
