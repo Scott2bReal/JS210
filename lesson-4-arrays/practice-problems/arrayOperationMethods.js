@@ -134,16 +134,76 @@ index, and the number of values to remove. The function should remove values
 from the original Array, starting with the start index and removing the
 specified number of values. The function should return the removed values in a
 new Array.
+
+algorithm:
+  1. init new array
+  2. iterate thru old array, starting at start index
+  3. copy current value to new array
+  4. set current index at old array to array[index + size]
 */
 
-const splice = (array, start, numValues) => {
+const splice = (array, start, size) => {
   let newArray = [];
 
-  for (let index = start; index < start + numValues; index++) {
+  for (let index = start; index < start + size; index++) {
     push(newArray, array[index]);
+    array[index] = array[index + size];
   }
+
+  array.length = array.length - size;
+  return newArray;
 }
 
-let count = [1, 2, 3, 4, 5, 6, 7, 8];
-console.log(splice(count, 2, 5));                   // [ 3, 4, 5, 6, 7 ]
-console.log(count);                                 // [ 1, 2, 8 ]
+// let count = [1, 2, 3, 4, 5, 6, 7, 8];
+// console.log(splice(count, 2, 5));                   // [ 3, 4, 5, 6, 7 ]
+// console.log(count);                                 // [ 1, 2, 8 ]
+
+/*
+9.
+Write a function named concat that accepts two Array arguments. The function
+should return a new Array that contains the values from each of the original
+Arrays.
+*/
+
+const concat = (arrayOne, arrayTwo) => {
+  let newArray = [];
+
+  for (let index = 0; index < arrayOne.length; index++) {
+    push(newArray, arrayOne[index]);
+  }
+
+  for (let index = 0; index < arrayTwo.length; index++) {
+    push(newArray, arrayTwo[index]);
+  }
+
+  return newArray;
+}
+
+console.log(concat([1, 2, 3], [4, 5, 6]));       // [ 1, 2, 3, 4, 5, 6 ]
+
+/*
+10.
+Write a function named join that accepts two arguments: an Array and a String.
+The function should coerce each value in the Array to a String, and then join
+those values together using the second argument as a separator. You may assume
+that a separator will always be passed.
+
+You can call the String function on any JavaScript value to get its String
+representation.
+*/
+
+const join = (array, delim) => {
+  newString = '';
+
+  for (let index = 0; index < array.length; index++) {
+    newString += String(array[index]);
+    if (index < array.length - 1) {
+      newString += delim;
+    }
+  }
+
+  return newString;
+}
+
+console.log(join(['bri', 'tru', 'wha'], 'ck '));       // 'brick truck wha'
+console.log(join([1, 2, 3], ' and '));                 // '1 and 2 and 3'
