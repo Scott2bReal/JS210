@@ -17,16 +17,16 @@ const calculateTip = () => {
   readlineSync = require('readline-sync');
 
   console.log("What is the bill?");
-  const bill = Number(readlineSync.prompt());
+  const bill = parseFloat(readlineSync.prompt());
   console.log("What is the tip percentage?");
-  const tipRate = Number(readlineSync.prompt());
+  const tipRate = parseFloat(readlineSync.prompt());
 
   const tip = bill * (tipRate / 100.0);
 
-  console.log(`The tip is ${tip}`)
+  console.log(`The tip is ${tip.toFixed(2)}`)
 
   const total = bill + tip;
-  console.log(`The total is ${total}`)
+  console.log(`The total is ${total.toFixed(2)}`)
 }
 
 calculateTip();
