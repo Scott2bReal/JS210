@@ -46,3 +46,37 @@ days like the 1st, 22nd, and 3rd. Write a function named dateSuffix that takes
 the day of month as a numeric value and returns the formatted day of month and
 suffix. Make sure you use the correct suffixes.
 */
+
+/*
+  when number.end_with?('11') then return 'th'
+  when number.end_with?('12') then return 'th'
+  when number.end_with?('13') then return 'th'
+  when number.end_with?('1') then return 'st'
+  when number.end_with?('2') then return 'nd'
+  when number.end_with?('3') then return 'rd'
+  end
+  'th'
+*/
+
+const dateSuffix = (num) => {
+  num = String(num);
+  let lastIndex = num.length - 1;
+
+  if (num[lastIndex - 1] === '1' && num[lastIndex] === '1') {
+    return num + 'th';
+  } else if (num[lastIndex - 1] === '1' && num[lastIndex] === '2') {
+    return num + 'th';
+  } else if (num[lastIndex - 1] === '1' && num[lastIndex] === '3') {
+    return num + 'th';
+  } else if (num[lastIndex] === '1') {
+    return num + 'st';
+  } else if (num[lastIndex] === '2') {
+    return num + 'nd';
+  } else if (num[lastIndex] === '3') {
+    return num + 'rd';
+  } else {
+    return num + 'th';
+  }
+}
+
+console.log(`Today's date is ${day}, the ${dateSuffix(month)}`);
