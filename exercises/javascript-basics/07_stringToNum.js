@@ -9,10 +9,43 @@ string to a number type.
 
 For now, do not worry about leading + or - signs, nor should you worry about
 invalid characters; assume all characters will be numeric.
+
+Algorithm:
+  1. split string into digits
+  2. map array of int digits backwards
+  3. init sum
+  4. iterate through that array
+  5. map ints array to 10 to the index power
+  6. calculate sum of array
 */
 
+const DIGITS = {
+  '0': 0,
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5,
+  '6': 6,
+  '7': 7,
+  '8': 8,
+  '9': 9,
+}
+
 const stringToInteger = (string) => {
-  return parseInt(string);
+  const stringDigits = string.split('');
+  let digits = [];
+  let sum = 0;
+
+  for (let index = stringDigits.length - 1; index >= 0; index--) {
+    digits.push(stringDigits[index]);
+  }
+
+  for (let index = 0; index < digits.length; index++) {
+    sum += digits[index] * (10 ** index);
+  }
+
+  return sum;
 }
 
 console.log(stringToInteger('4321'));      // 4321
