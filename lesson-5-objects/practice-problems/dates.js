@@ -35,9 +35,7 @@ month. Don't worry about using different suffixes for numbers that end with 1,
 2, or 3 just yet; we'll deal with that in the next problem.
 */
 
-let day = daysOfWeek[today.getDay()];
-let month = today.getDate();
-console.log(`Today's date is ${day}, the ${month}th`)
+console.log(`Today's date is ${daysOfWeek[today.getDay()]}, the ${today.getDate()}th`)
 
 /*
 5.
@@ -45,17 +43,6 @@ Ideally, the suffix on the day number needs to adjust to the proper suffix for
 days like the 1st, 22nd, and 3rd. Write a function named dateSuffix that takes
 the day of month as a numeric value and returns the formatted day of month and
 suffix. Make sure you use the correct suffixes.
-*/
-
-/*
-  when number.end_with?('11') then return 'th'
-  when number.end_with?('12') then return 'th'
-  when number.end_with?('13') then return 'th'
-  when number.end_with?('1') then return 'st'
-  when number.end_with?('2') then return 'nd'
-  when number.end_with?('3') then return 'rd'
-  end
-  'th'
 */
 
 const dateSuffix = (num) => {
@@ -79,4 +66,83 @@ const dateSuffix = (num) => {
   }
 }
 
-console.log(`Today's date is ${day}, the ${dateSuffix(month)}`);
+console.log(`Today's date is ${daysOfWeek[today.getDay()]}, the ${dateSuffix(today.getDate())}`);
+
+/*
+6.
+Change your output to include the value from the getMonth method. Thus, the
+logged string will read "Today's date is Mon, 11 6th", where 11 is the month
+number returned by getMonth.
+*/
+
+console.log(`Today's date is ${daysOfWeek[today.getDay()]}, ${today.getMonth()} ${dateSuffix(today.getDate())}`);
+
+/*
+7.
+Let's make the month readable. Using the same technique we used in problem 3,
+convert the month number in the output string to a 3-letter month name
+abbreviation. You may use the following array:
+*/
+
+let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+console.log(`Today's date is ${daysOfWeek[today.getDay()]}, ${months[today.getMonth()]} ${dateSuffix(today.getDate())}`);
+
+/*
+8.
+Our call to console.log is getting cluttered. Let's clean things up a bit and
+refactor the code into a few formatting functions that we can call from
+anywhere in our code. Create formattedMonth and formattedDay functions to
+format the month and day, then write a formattedDate function that pulls
+everything together and logs the fully formatted date.
+*/
+
+const formattedMonth = (date) => {
+  return months[date.getMonth()];
+}
+
+const formattedDay = (date) => {
+  return daysOfWeek[date.getDay()];
+}
+
+const formattedDate = (date) => {
+  const weekday = formattedDay(date);
+  const month = formattedMonth(date);
+  const day = dateSuffix(today.getDate());
+
+  console.log(`Today's date is ${weekday}, ${month} ${day}`);
+}
+
+formattedDate(today);
+
+/*
+9.
+Log the values returned from the getFullYear and getYear methods. Note how
+these values differ. Note especially that getYear is deprecated: you should
+avoid using deprecated methods as they may one day disappear.
+*/
+
+console.log(today.getFullYear());
+console.log(today.getYear());
+
+/*
+10.
+Use the getTime method and log the current date and time in total milliseconds
+since Jan. 1st 1970.
+*/
+
+console.log(today.getTime());
+
+/*
+11.
+Create a new date object variable named tomorrow that contains a Date object.
+Initialize the variable by setting it to the value of today. You can get the
+value of today using the getTime method. Next, change the date on the tomorrow
+object to the day after today: you should use setDate to change the date.
+Finally, log the tomorrow object with your formattedDate function.
+*/
+
+let tomorrow = new Date(today.getTime());
+tomorrow.setDate(today.getDate() + 1);
+console.log(tomorrow);
+formattedDate(tomorrow);
