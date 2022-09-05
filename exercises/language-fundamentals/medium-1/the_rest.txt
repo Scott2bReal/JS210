@@ -1,0 +1,2 @@
+The rest of these got wiped by an accidental git merge. I may come back and
+re-answer them, but for now I'll be moving on.
